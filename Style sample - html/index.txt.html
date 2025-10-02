@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odds Raiders - Sports Predictions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --neon-blue: #00aaff;
+            --neon-purple: #8000ff;
+            --neon-pink: #ff00c8;
+            --neon-gold: #ffd700;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --logo-blue: #00aaff;
+            --logo-purple: #8000ff;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            font-family: 'Exo 2', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+        }
+        
+        .neon-border {
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+        }
+        
+        .neon-button {
+            background: linear-gradient(90deg, var(--logo-blue), var(--logo-purple), var(--neon-gold));
+            box-shadow: 0 0 10px var(--logo-blue), 0 0 20px var(--logo-purple), 0 0 30px var(--neon-gold);
+            transition: all 0.3s ease;
+        }
+        
+        .neon-button:hover {
+            box-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-purple), 0 0 45px var(--neon-gold);
+            transform: translateY(-2px);
+        }
+        
+        .prediction-card {
+            background: rgba(10, 10, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .prediction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.5), 0 0 25px rgba(255, 215, 0, 0.3);
+            border: 1px solid var(--logo-blue);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 5px rgba(189, 0, 255, 0.7), 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(90deg, var(--logo-blue), var(--logo-purple), var(--neon-gold));
+        }
+        
+        .nav-link:hover {
+            text-shadow: 0 0 5px var(--logo-blue), 0 0 10px var(--neon-gold);
+        }
+        
+        .stats-card {
+            background: rgba(10, 10, 30, 0.5);
+            border: 1px solid rgba(189, 0, 255, 0.3);
+        }
+        
+        .stats-card:hover {
+            border: 1px solid var(--logo-purple);
+            box-shadow: 0 0 10px rgba(128, 0, 255, 0.5), 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.7), 0 0 0 0 rgba(255, 215, 0, 0.3); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 247, 255, 0), 0 0 0 15px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0), 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="border-b border-gray-800 py-4 px-6 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <img src="https://oddsraiders.com/wp-content/uploads/2023/10/Odds-Raiders-Logo.png" alt="Odds Raiders Logo" class="w-10 h-10 rounded-full">
+            <h1 class="text-2xl font-bold neon-text font-['Orbitron']">ODDS RAIDERS</h1>
+        </div>
+        
+        <div class="hidden md:flex space-x-8">
+            <a href="#" class="nav-link font-medium">Home</a>
+            <a href="predictions.html" class="nav-link font-medium">Predictions</a>
+            <a href="leagues.html" class="nav-link font-medium">Leagues</a>
+            <a href="#" class="nav-link font-medium">Stats</a>
+            <a href="pricing.html" class="nav-link font-medium">Pricing</a>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <button class="px-4 py-2 rounded-lg neon-button font-semibold">Subscribe</button>
+            <button class="md:hidden">
+                <i data-feather="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="py-16 px-6 text-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500 rounded-full filter blur-3xl opacity-20"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 font-['Orbitron']">
+                <span class="neon-text">SPORTS PREDICTIONS</span> 
+                <span class="text-white">DELIVERED TO YOU</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                Access premium sports predictions with 85%+ accuracy. Join thousands of subscribers who trust our data-driven insights.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="px-8 py-4 rounded-lg neon-button font-bold text-lg pulse">
+                    GET PREMIUM ACCESS - $5/MONTH
+                </button>
+                <button class="px-8 py-4 rounded-lg border border-gray-600 bg-transparent font-bold text-lg hover:bg-gray-800 transition">
+                    VIEW SAMPLE PREDICTIONS
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="py-12 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="stats-card p-6 rounded-xl text-center" data-aos="fade-up">
+                <div class="text-3xl font-bold neon-text mb-2">85%</div>
+                <div class="text-gray-300">Accuracy Rate</div>
+            </div>
+            <div class="stats-card p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-3xl font-bold neon-text mb-2">15K+</div>
+                <div class="text-gray-300">Subscribers</div>
+            </div>
+            <div class="stats-card p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-3xl font-bold neon-text mb-2">98%</div>
+                <div class="text-gray-300">Uptime</div>
+            </div>
+            <div class="stats-card p-6 rounded-xl text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-3xl font-bold neon-text mb-2">24/7</div>
+                <div class="text-gray-300">Live Updates</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Predictions -->
+    <section class="py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 font-['Orbitron']">TODAY'S <span class="neon-text">FEATURED</span> PREDICTIONS</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Premium predictions updated every 15 minutes with real-time data analysis</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Prediction Card 1 -->
+                <div class="prediction-card rounded-xl p-6" data-aos="fade-up">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm px-3 py-1 rounded-full bg-blue-900 text-blue-300">Premier League</span>
+                        <span class="text-sm text-gray-400">Today 20:00</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold">MCI</span>
+                            </div>
+                            <div class="font-medium">Manchester City</div>
+                        </div>
+                        
+                        <div class="text-2xl font-bold text-gray-500">VS</div>
+                        
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold">ARS</span>
+                            </div>
+                            <div class="font-medium">Arsenal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Prediction Confidence</span>
+                            <span class="font-bold">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-neon-blue to-neon-purple h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="text-sm text-gray-400">Recommended Bet</div>
+                            <div class="font-bold glow-text">Manchester City Win</div>
+                        </div>
+                        <button class="px-4 py-2 rounded-lg border border-gray-600 hover:bg-gray-800 transition hover:shadow-lg hover:shadow-yellow-500/20">
+                            Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Prediction Card 2 -->
+                <div class="prediction-card rounded-xl p-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm px-3 py-1 rounded-full bg-purple-900 text-purple-300">La Liga</span>
+                        <span class="text-sm text-gray-400">Today 21:00</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold">BAR</span>
+                            </div>
+                            <div class="font-medium">Barcelona</div>
+                        </div>
+                        
+                        <div class="text-2xl font-bold text-gray-500">VS</div>
+                        
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold">RMA</span>
+                            </div>
+                            <div class="font-medium">Real Madrid</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Prediction Confidence</span>
+                            <span class="font-bold">88%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-neon-purple to-neon-pink h-2 rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="text-sm text-gray-400">Recommended Bet</div>
+                            <div class="font-bold glow-text">Over 2.5 Goals</div>
+                        </div>
+                        <button class="px-4 py-2 rounded-lg border border-gray-600 hover:bg-gray-800 transition hover:shadow-lg hover:shadow-yellow-500/20">
+                            Details
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Prediction Card 3 -->
+                <div class="prediction-card rounded-xl p-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm px-3 py-1 rounded-full bg-pink-900 text-pink-300">Bundesliga</span>
+                        <span class="text-sm text-gray-400">Tomorrow 19:30</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold">BAY</span>
+                            </div>
+                            <div class="font-medium">Bayern Munich</div>
+                        </div>
+                        
+                        <div class="text-2xl font-bold text-gray-500">VS</div>
+                        
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-2">
+                                <span class="font-bold">DOR</span>
+                            </div>
+                            <div class="font-medium">Dortmund</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Prediction Confidence</span>
+                            <span class="font-bold">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-neon-pink to-neon-blue h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="text-sm text-gray-400">Recommended Bet</div>
+                            <div class="font-bold glow-text">Bayern Munich -1.5</div>
+                        </div>
+                        <button class="px-4 py-2 rounded-lg border border-gray-600 hover:bg-gray-800 transition hover:shadow-lg hover:shadow-yellow-500/20">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="px-6 py-3 rounded-lg border border-gray-600 hover:bg-gray-800 transition font-medium">
+                    VIEW ALL PREDICTIONS
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="py-16 px-6 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 font-['Orbitron']">PREMIUM <span class="neon-text">SUBSCRIPTION</span></h2>
+            <p class="text-gray-400 mb-12 max-w-2xl mx-auto">
+                Unlock access to all premium predictions, real-time updates, and exclusive analytics
+            </p>
+            
+            <div class="prediction-card rounded-2xl p-8 max-w-md mx-auto border-2 border-logo-blue" data-aos="fade-up">
+                <div class="flex justify-center mb-4">
+                    <img src="https://oddsraiders.com/wp-content/uploads/2023/10/Odds-Raiders-Logo.png" alt="Odds Raiders Logo" class="w-16 h-16">
+                </div>
+                <h3 class="text-2xl font-bold mb-2">PREMIUM PLAN</h3>
+                <div class="text-5xl font-bold neon-text mb-6">$5<span class="text-xl text-gray-400">/month</span></div>
+                
+                <ul class="text-left space-y-4 mb-8">
+                    <li class="flex items-center">
+                        <i data-feather="check-circle" class="text-green-500 mr-2"></i>
+                        <span>Access to all predictions</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i data-feather="check-circle" class="text-green-500 mr-2"></i>
+                        <span>Real-time updates every 15 minutes</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i data-feather="check-circle" class="text-green-500 mr-2"></i>
+                        <span>85%+ accuracy rate</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i data-feather="check-circle" class="text-green-500 mr-2"></i>
+                        <span>Exclusive analytics dashboard</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i data-feather="check-circle" class="text-green-500 mr-2"></i>
+                        <span>24/7 customer support</span>
+                    </li>
+                </ul>
+                
+                <button class="w-full py-4 rounded-lg neon-button font-bold text-lg hover:shadow-lg hover:shadow-yellow-500/30">
+                    SUBSCRIBE NOW
+                </button>
+                
+                <div class="mt-4 text-sm text-gray-400">
+                    7-day free trial • Cancel anytime
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="https://oddsraiders.com/wp-content/uploads/2023/10/Odds-Raiders-Logo.png" alt="Odds Raiders Logo" class="w-8 h-8 rounded-full">
+                        <h3 class="text-xl font-bold neon-text font-['Orbitron']">ODDS RAIDERS</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Premium sports predictions powered by advanced analytics and machine learning.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">PRODUCT</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Predictions</a></li>
+                        <li><a href="#" class="hover:text-white">Analytics</a></li>
+                        <li><a href="#" class="hover:text-white">API Access</a></li>
+                        <li><a href="#" class="hover:text-white">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">COMPANY</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">SUPPORT</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>© 2023 Odds Raiders. All rights reserved. Odds data provided by API-Football.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+        
+        feather.replace();
+    </script>
+</body>
+</html>

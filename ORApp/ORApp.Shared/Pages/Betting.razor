@@ -1,0 +1,40 @@
+@page "/betting"
+@inject ORApp.Web.Models.BettingViewModel ViewModel
+
+<PageTitle>ORApp - Sports Betting</PageTitle>
+
+<div class="betting-container">
+    <h1>Sports Betting Analysis</h1>
+
+    <div class="input-section">
+        <label for="matchInput">Enter Match Details or Query:</label>
+        <textarea id="matchInput" @bind="ViewModel.InputText" placeholder="e.g., Manchester United vs Liverpool, Premier League"></textarea>
+    </div>
+
+    <div class="buttons-section">
+        <button @onclick="ViewModel.ProcessPredictions" disabled="@ViewModel.IsProcessing">
+            @if (ViewModel.IsProcessing) { <span>Processing...</span> } else { <span>Get Predictions</span> }
+        </button>
+        <button @onclick="ViewModel.CalculateOdds" disabled="@ViewModel.IsProcessing">
+            @if (ViewModel.IsProcessing) { <span>Processing...</span> } else { <span>Calculate Odds</span> }
+        </button>
+    </div>
+
+    <div class="results-section">
+        @if (!string.IsNullOrEmpty(ViewModel.PredictionsResult))
+        {
+            <div class="result-card">
+                <h3>Predictions</h3>
+                <p>@ViewModel.PredictionsResult</p>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(ViewModel.OddsResult))
+        {
+            <div class="result-card">
+                <h3>Odds</h3>
+                <p>@ViewModel.OddsResult</p>
+            </div>
+        }
+    </div>
+</div>

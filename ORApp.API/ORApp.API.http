@@ -1,0 +1,6 @@
+@ORApp.API_HostAddress = http://localhost:5283
+
+GET {{ORApp.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

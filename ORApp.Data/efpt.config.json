@@ -1,0 +1,170 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "ORDBContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "MinimumProductVersion": "2.6.1130",
+   "ModelNamespace": null,
+   "OutputContextPath": "Context",
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "ORApp.Data",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[ApiIngest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BettingMarkets]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[BettingOutcomes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Coaches]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Countries]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EventTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FixtureEvents]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Fixtures]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FixtureStatuses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Leagues]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Lineups]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Odds]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PasswordResets]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentProviders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Payments]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentStatuses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlayerPositions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Players]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PlayerTransfers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Predictions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProviderWebhookEvents]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Seasons]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Sessions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Standings]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Statisticals]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Subscriptions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SubscriptionStatuses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SubscriptionTiers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Teams]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Users]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Venues]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": true,
+   "UseNoDefaultConstructor": true,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}
