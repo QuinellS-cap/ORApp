@@ -29,6 +29,8 @@ public partial class Teams
 
     public DateTime? DateCreated { get; set; }
 
+    public int ApiTeamId { get; set; }
+
     [InverseProperty("Team")]
     public virtual ICollection<Coaches> Coaches { get; set; } = new List<Coaches>();
 

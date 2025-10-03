@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace ORApp
+namespace ORApp.Platforms.MacCatalyst
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

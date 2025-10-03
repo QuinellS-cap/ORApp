@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using ORApp.API.Models; // For JwtSettings
+using ORApp.API;
 using ORApp.API.Repositories; // If you use repositories
 using ORApp.API.Services; // For service interfaces/impl
 using ORApp.Data; // For DbContext
@@ -109,7 +109,7 @@ public class PasswordHasherService : IPasswordHasherService
     }
 }
 
-namespace ORApp.API.Models
+namespace ORApp.API
 {
     public class JwtSettings
     {

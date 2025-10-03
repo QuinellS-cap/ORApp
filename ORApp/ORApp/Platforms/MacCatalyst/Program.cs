@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace ORApp
+namespace ORApp.Platforms.MacCatalyst
 {
     public class Program
     {

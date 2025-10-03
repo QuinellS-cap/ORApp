@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace ORApp
+namespace ORApp.Platforms.iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

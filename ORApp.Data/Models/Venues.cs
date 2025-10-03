@@ -29,6 +29,8 @@ public partial class Venues
 
     public DateTime? DateCreated { get; set; }
 
+    public int ApiVenueId { get; set; }
+
     [ForeignKey("CountryId")]
     [InverseProperty("Venues")]
     public virtual Countries Country { get; set; }

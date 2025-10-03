@@ -37,6 +37,8 @@ public partial class Fixtures
 
     public DateTime? DateCreated { get; set; }
 
+    public int ApiFixtureId { get; set; }
+
     [ForeignKey("AwayTeamId")]
     [InverseProperty("FixturesAwayTeam")]
     public virtual Teams AwayTeam { get; set; }

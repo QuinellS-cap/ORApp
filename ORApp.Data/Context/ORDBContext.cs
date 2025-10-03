@@ -14,6 +14,12 @@ public partial class ORDBContext : DbContext
     {
     }
 
+    public virtual DbSet<ApiIngest> ApiIngest { get; set; }
+
+    public virtual DbSet<BettingMarkets> BettingMarkets { get; set; }
+
+    public virtual DbSet<BettingOutcomes> BettingOutcomes { get; set; }
+
     public virtual DbSet<Coaches> Coaches { get; set; }
 
     public virtual DbSet<Countries> Countries { get; set; }
@@ -29,6 +35,8 @@ public partial class ORDBContext : DbContext
     public virtual DbSet<Leagues> Leagues { get; set; }
 
     public virtual DbSet<Lineups> Lineups { get; set; }
+
+    public virtual DbSet<Odds> Odds { get; set; }
 
     public virtual DbSet<PasswordResets> PasswordResets { get; set; }
 
@@ -70,6 +78,25 @@ public partial class ORDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ApiIngest>(entity =>
+        {
+            entity.HasKey(e => e.IngestId).HasName("PK__ApiInges__D287CE5E8DF16193");
+
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("(sysutcdatetime())");
+        });
+
+        modelBuilder.Entity<BettingMarkets>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__BettingM__3214EC079CC2EBAE");
+        });
+
+        modelBuilder.Entity<BettingOutcomes>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__BettingO__3214EC07D0EBA34A");
+
+            entity.HasOne(d => d.Market).WithMany(p => p.BettingOutcomes).HasConstraintName("FK__BettingOu__Marke__300424B4");
+        });
+
         modelBuilder.Entity<Coaches>(entity =>
         {
             entity.HasKey(e => e.CoachId).HasName("PK__Coaches__F411D941AAFDB4C8");
@@ -155,6 +182,21 @@ public partial class ORDBContext : DbContext
             entity.HasOne(d => d.Position).WithMany(p => p.Lineups).HasConstraintName("FK__Lineups__Positio__1EA48E88");
 
             entity.HasOne(d => d.Team).WithMany(p => p.Lineups).HasConstraintName("FK__Lineups__TeamId__1BC821DD");
+        });
+
+        modelBuilder.Entity<Odds>(entity =>
+        {
+            entity.HasKey(e => e.OddsId).HasName("PK__Odds__7D7DC403393D301F");
+
+            entity.Property(e => e.RetrievedAt).HasDefaultValueSql("(sysutcdatetime())");
+
+            entity.HasOne(d => d.Fixture).WithMany(p => p.Odds).HasConstraintName("FK__Odds__FixtureId__2DE6D218");
+
+            entity.HasOne(d => d.Market).WithMany(p => p.Odds).HasConstraintName("FK__Odds__MarketId__2FCF1A8A");
+
+            entity.HasOne(d => d.Outcome).WithMany(p => p.Odds).HasConstraintName("FK__Odds__OutcomeId__30C33EC3");
+
+            entity.HasOne(d => d.Provider).WithMany(p => p.Odds).HasConstraintName("FK__Odds__ProviderId__2EDAF651");
         });
 
         modelBuilder.Entity<PasswordResets>(entity =>
